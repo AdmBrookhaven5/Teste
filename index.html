@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Delta APK</title>
+</head>
+<body>
+  <h2>Última versão:</h2>
+  <p id="out">Buscando...</p>
+
+  <button onclick="loadApk()">Buscar APK</button>
+
+  <script>
+    async function loadApk() {
+      const res = await fetch("/api/get-apk");
+      const data = await res.json();
+
+      const out = document.getElementById("out");
+      if (data.apk) {
+        out.innerHTML = `<a href="${data.apk}" target="_blank">${data.apk}</a>`;
+      } else {
+        out.textContent = "Não encontrado";
+      }
+    }
+
+    loadApk();
+  </script>
+</body>
+</html>
